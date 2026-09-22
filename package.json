@@ -7,10 +7,11 @@
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
-    "test": "jest",
+    "test": "mocha -r ts-node/register 'tests/**/*.test.ts' --timeout 10000",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
-    "prisma:seed": "ts-node prisma/seed.ts"
+    "prisma:seed": "tsx prisma/seed.ts",
+    "prisma:wipe": "tsx prisma/wipe.ts"
   },
   "repository": {
     "type": "git",
@@ -24,13 +25,14 @@
   },
   "homepage": "https://github.com/seifeldin1/Project-Managment-System#readme",
   "dependencies": {
-    "@prisma/client": "^7.10.0",
+    "@prisma/client": "^5.22.0",
     "bcryptjs": "^3.0.3",
     "dotenv": "^18.0.3",
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
+    "mongodb": "^7.6.0",
     "morgan": "^1.12.1",
-    "prisma": "^7.10.0",
+    "prisma": "^5.22.0",
     "winston": "^3.19.0",
     "zod": "^4.6.5"
   },
@@ -47,6 +49,7 @@
     "mocha": "^12.0.2",
     "sinon": "^22.1.0",
     "ts-node": "^10.9.2",
+    "tsx": "^4.23.15",
     "typescript": "^7.0.2"
   }
 }
