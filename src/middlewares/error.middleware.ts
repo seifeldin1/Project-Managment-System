@@ -9,14 +9,14 @@ export const errorHandler = (
   res: Response,
   next: NextFunction
 ) => {
-  if (err instanceof AppError) {
+  if(err instanceof AppError) {
     return res.status(err.statusCode).json({
       success: false,
       message: err.message,
     });
   }
 
-  if (err.code === 'P2002') {
+  if(err.code === 'P2002') {
     logger.error(`Prisma Unique Constraint Error: ${err.meta?.target}`);
     return res.status(409).json({
       success: false,
