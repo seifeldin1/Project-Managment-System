@@ -1,6 +1,6 @@
-import { Request } from 'express';
+import { Request, ParamsDictionary } from 'express';
 
-export interface AuthRequest extends Request {
+export interface AuthRequest<P = ParamsDictionary> extends Request<P> {
   user?: {
     userId: string;
   };
