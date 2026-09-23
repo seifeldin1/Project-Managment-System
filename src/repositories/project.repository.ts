@@ -2,7 +2,7 @@ import { prisma } from '../config/prisma';
 import { Prisma, Project } from '@prisma/client';
 
 export class ProjectRepository {
-  async findById(id: string): Promise<Project | null> {
+  async findById(id: string) {
     return prisma.project.findUnique({
       where: { id },
       include: { 
@@ -18,7 +18,7 @@ export class ProjectRepository {
     skip: number, 
     take: number, 
     filters?: Prisma.ProjectWhereInput
-  ): Promise<Project[]> {
+  ) {
     return prisma.project.findMany({
       where: {
         members: { some: { userId } },
@@ -35,15 +35,15 @@ export class ProjectRepository {
     });
   }
 
-  async create(data: Prisma.ProjectCreateInput): Promise<Project> {
+  async create(data: Prisma.ProjectCreateInput) {
     return prisma.project.create({ data, include: { members: true } });
   }
 
-  async update(id: string, data: Prisma.ProjectUpdateInput): Promise<Project> {
+  async update(id: string, data: Prisma.ProjectUpdateInput) {
     return prisma.project.update({ where: { id }, data });
   }
 
-  async delete(id: string): Promise<Project> {
+  async delete(id: string) {
     return prisma.project.delete({ where: { id } });
   }
 }

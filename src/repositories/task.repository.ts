@@ -1,8 +1,8 @@
 import { prisma } from '../config/prisma';
-import { Prisma, Task } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 
 export class TaskRepository {
-  async findById(id: string): Promise<Task | null> {
+  async findById(id: string) {
     return prisma.task.findUnique({
       where: { id },
       include: { 
@@ -19,7 +19,7 @@ export class TaskRepository {
     skip: number, 
     take: number, 
     filters?: Prisma.TaskWhereInput
-  ): Promise<Task[]> {
+  ) {
     return prisma.task.findMany({
       where: { projectId, ...filters },
       skip,
@@ -29,15 +29,15 @@ export class TaskRepository {
     });
   }
 
-  async create(data: Prisma.TaskCreateInput): Promise<Task> {
+  async create(data: Prisma.TaskCreateInput) {
     return prisma.task.create({ data, include: { assignee: true } });
   }
 
-  async update(id: string, data: Prisma.TaskUpdateInput): Promise<Task> {
+  async update(id: string, data: Prisma.TaskUpdateInput) {
     return prisma.task.update({ where: { id }, data });
   }
 
-  async delete(id: string): Promise<Task> {
+  async delete(id: string) {
     return prisma.task.delete({ where: { id } });
   }
 }
