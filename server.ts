@@ -6,6 +6,7 @@ const PORT = config.port;
 
 const server = app.listen(PORT, () => {
   logger.info(`Server running on port ${PORT} in ${config.nodeEnv} mode`);
+  console.log(`Server is running on http://localhost:${PORT} in ${config.nodeEnv} mode`);
 });
 
 process.on('SIGTERM', () => {
